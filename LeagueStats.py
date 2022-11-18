@@ -1,7 +1,6 @@
 from basketball_reference_web_scraper import client
 from basketball_reference_web_scraper.data import OutputType
 import json
-from . import player
 
 class LeagueStats:
     points = 0
@@ -44,7 +43,10 @@ class LeagueStats:
         averageStats.rebounds = self.rebounds / totalPlayers
         averageStats.steals = self.steals / totalPlayers
         averageStats.blocks = self.blocks / totalPlayers
-        averageStats.ftAverage = self.ftTaken / self.ftMade
-        averageStats.averageFg = self.fgMade / self.totalFg
+        if(self.ftMade != 0):
+            averageStats.ftAverage = self.ftMade / self.ftTaken
+        if(self.fgMade != 0):
+            averageStats.averageFg = self.fgMade / self.totalFg
         averageStats.turnovers = self.turnovers / totalPlayers
         averageStats.tray = self.tray / totalPlayers
+        return averageStats
